@@ -13,6 +13,7 @@ $rawSearch = $_GET['query'];
 $escapedSearch = str_replace(['%', '_'], ['\\%', '\\_'], $rawSearch);
 $search = "%" . $escapedSearch . "%";
 
+
 // Prepare statement
 $stmt = $conn->prepare("
     SELECT id, name, sku, category, price 
@@ -38,3 +39,4 @@ $stmt->close();
 $conn->close();
 
 ?>
+
