@@ -8,8 +8,10 @@ if (!isset($_GET['query']) || strlen($_GET['query']) < 3) {
     exit;
 }
 
-// Added a wildcards for LIKE safely
-$search = "%" . $_GET['query'] . "%";
+// To EscapeThe LIKE wildcards 
+$rawSearch = $_GET['query'];
+$escapedSearch = str_replace(['%', '_'], ['\\%', '\\_'], $rawSearch);
+$search = "%" . $escapedSearch . "%";
 
 // Prepare statement
 $stmt = $conn->prepare("
@@ -34,4 +36,5 @@ echo json_encode($products);
 
 $stmt->close();
 $conn->close();
+
 ?>
